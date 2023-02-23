@@ -17,8 +17,8 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
 
-#permissions:
-  #contents: read
+permissions:
+  contents: none
 
 jobs:
   build:
