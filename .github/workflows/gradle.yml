@@ -54,7 +54,7 @@ jobs:
         # Destination path
         path: ./dist/paras
     - run: |
-          #ls -ltr ./dist/paras
+          ls -ltr ./dist/paras
     - name: Cache SonarCloud packages
       uses: actions/cache@v1
       with:
