@@ -50,9 +50,9 @@ jobs:
         # Artifact name
         name: jb-hello-world-gradle-0.1.0.jar
         # Destination path
-        path: ./dist/sudha
+        path: ./dist/paras
     - run: |
-          ls -ltr ./dist/sudha
+          ls -ltr ./dist/paras
     - name: Cache SonarCloud packages
       uses: actions/cache@v1
       with:
