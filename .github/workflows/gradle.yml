@@ -48,11 +48,11 @@ jobs:
            ls -ltr ./build/libs
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3.0.2
-      #with:
+      with:
         # Artifact name
         #name: jb-hello-world-gradle-0.1.0.jar
         # Destination path
-        #path: ./dist/paras
+        path: ./dist/paras
     - run: |
           #ls -ltr ./dist/paras
     - name: Cache SonarCloud packages
