@@ -61,18 +61,6 @@ jobs:
         path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
-    #- name: Build and analyze
-     # env:
-     #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-     #   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #run: ./gradlew build jacocoTestReport sonarqube --info
-     # run: ./gradlew sonarqube --info
-    
-    #- name: SonarCloud Scan
-     # uses: sonarsource/sonarcloud-github-action@master
-     # env:
-     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -86,4 +74,25 @@ jobs:
         path: ./dist/terraformdeploy
     - run: |
            ls -ltr ./dist/terraformdeploy
-        
+    - name: AWS create s3 bucket
+      uses: aitorres/aws-s3-create-bucket@v1.2.0
+      with:
+        # Name of the bucket that will be created (make sure it is unique)
+        bucket-name: java-hello-world
+        # AWS Access Key ID
+        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+        # AWS Secret Access Key
+        aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+        # AWS Region (default: us-east-1)
+        aws-region: us-west-2
+        # ACL to apply to the bucket during creation (default: private)
+        acl: public
+    - name: S3 Bucket Upload Action
+      uses: keithweaver/aws-s3-github-action@v1.0.0
+      with:
+        command: cp
+        source: ./dist/terraformdeploy/jb-hello-world-gradle-0.1.0.jar
+        destination: s3://java-hello-world/hello/jb-hello-world-gradle-0.1.0.jar
+        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+        aws-region: us-west-2
