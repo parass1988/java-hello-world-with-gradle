@@ -87,12 +87,16 @@ jobs:
         aws-region: us-west-2
         # ACL to apply to the bucket during creation (default: private)
         acl: private
-    - name: S3 Bucket Upload Action
-      uses: keithweaver/aws-s3-github-action@v1.0.0
+    - name: Upload S3
+      # You may pin to the exact commit or the version.
+      # uses: shallwefootball/upload-s3-action@c4cfeaaed73281bfe254f571e42d8187deaffe97
+      uses: shallwefootball/upload-s3-action@v1.3.0
       with:
-        command: cp
-        source: ./dist/terraformdeploy/jb-hello-world-gradle-0.1.0.jar
-        destination: s3://java-hello-world/hello/jb-hello-world-gradle-0.1.0.jar
-        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-        aws-secret-access-key: ${{ secrets.SECRET_KEY }}
-        aws-region: us-west-2
+        # aws key id
+        aws_key_id: ${{ secrets.ACCESS_KEY }}
+        # aws secret access key
+        aws_secret_access_key: ${{ secrets.SECRET_KEY }}
+        # aws bucket name
+        aws_bucket: java-hello-world
+        # directory to upload
+        source_dir: ./dist/terraformdeploy/jb-hello-world-gradle-0.1.0.jar
