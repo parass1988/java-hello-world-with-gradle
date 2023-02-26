@@ -79,7 +79,7 @@ jobs:
       id: bucket
       with:
         # Name of the bucket that will be created (make sure it is unique)
-        bucket-name: java-hello-world-104
+        bucket-name: java-hello-world-105
         # AWS Access Key ID
         aws-access-key-id: ${{ secrets.ACCESS_KEY }}
         # AWS Secret Access Key
@@ -89,7 +89,8 @@ jobs:
         # ACL to apply to the bucket during creation (default: private)
         acl: private
     - run: |
-           export bucketname=java-hello-world-104
+           export bucketname=java-hello-world-105
+           echo "::set-env name=bucketname::$bucketname"
     - name: Upload S3
       if: always()
       uses: shallwefootball/upload-s3-action@v1.3.0
