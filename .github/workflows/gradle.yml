@@ -86,7 +86,7 @@ jobs:
         # AWS Region (default: us-east-1)
         aws-region: us-west-2
         # ACL to apply to the bucket during creation (default: private)
-        acl: public
+        acl: private
     - name: S3 Bucket Upload Action
       uses: keithweaver/aws-s3-github-action@v1.0.0
       with:
