@@ -77,7 +77,7 @@ jobs:
     - name: Set bucket name
       id: bucketoutput
       run: |
-           bucketname=java-hello-world-105
+           bucketname=java-hello-world-110
            echo "::set-output name=bucketname::java-hello-world-105"
     - name: AWS create s3 bucket
       uses: aitorres/aws-s3-create-bucket@v1.2.0
